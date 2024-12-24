@@ -2,31 +2,30 @@
   "schemaVersion": 1,
   "id": "${id}",
   "version": "${version}",
-
   "name": "${name}",
-  "description": "Template for my fabric mods",
+  "description": "Add additional colors for Text Placeholder API",
   "authors": [
-    "Fallen_Breath"
+    "sakura-ryoko"
   ],
   "contact": {
-    "homepage": "https://modrinth.com",
-    "sources": "https://github.com/Fallen-Breath/fabric-mod-template"
+    "homepage": "https://modrinth.com/mod/more-color-api",
+    "sources": "https://github.com/sakura-ryoko/more-color-api",
+    "issues": "https://github.com/sakura-ryoko/more-color-api/issues"
   },
-
-  "icon": "assets/template_mod/icon.png",
-
+  "license": "LGPL-3.0",
+  "icon": "assets/more-color-api/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
-      "me.fallenbreath.template_mod.TemplateMod"
+      "com.sakuraryoko.morecolors.MoreColors"
     ]
   },
   "mixins": [
-    "template_mod.mixins.json"
+    "more-color-api.mixins.json"
   ],
-
   "depends": {
     "fabricloader": ">=0.11.4",
+    "placeholder-api": "*",
     "minecraft": "${minecraft_dependency}"
   }
 }
