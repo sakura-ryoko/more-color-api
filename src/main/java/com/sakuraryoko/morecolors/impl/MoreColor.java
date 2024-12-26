@@ -18,10 +18,33 @@
  * along with MoreColorAPI.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.sakuraryoko.morecolors.api.config;
+package com.sakuraryoko.morecolors.impl;
 
-public interface IConfigOption
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.ApiStatus;
+
+import net.fabricmc.api.ModInitializer;
+
+import com.sakuraryoko.corelib.impl.modinit.ModInitManager;
+import com.sakuraryoko.morecolors.impl.modinit.MoreColorInit;
+
+@ApiStatus.Internal
+public class MoreColor implements ModInitializer
 {
-    void defaults();
-    IConfigOption copy(IConfigOption opt);
+    public static Logger LOGGER = LogManager.getLogger(Reference.MOD_ID);
+
+    public static void debugLog(String key, Object... args)
+    {
+        if (MoreColorInit.getInstance().isDebug())
+        {
+            LOGGER.info(String.format("[DEBUG] %s", key), args);
+        }
+    }
+
+    @Override
+    public void onInitialize()
+    {
+        ModInitManager.getInstance().registerModInitHandler(MoreColorInit.getInstance());
+    }
 }

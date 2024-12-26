@@ -38,7 +38,7 @@ import org.jetbrains.annotations.ApiStatus;
 
 import net.minecraft.network.chat.TextColor;
 
-import com.sakuraryoko.morecolors.impl.MoreColors;
+import com.sakuraryoko.morecolors.impl.MoreColor;
 import com.sakuraryoko.morecolors.api.MoreColorsEvents;
 import com.sakuraryoko.morecolors.impl.config.ConfigWrap;
 import com.sakuraryoko.morecolors.impl.text.TextUtils;
@@ -70,7 +70,7 @@ public class NodeManager
         {
             REMOVE.forEach((iNode) ->
             {
-                MoreColors.LOGGER.warn("Removing Node \"{}\" from config, because it was detected as being in use.", iNode.getName());
+                MoreColor.LOGGER.warn("Removing Node \"{}\" from config, because it was detected as being in use.", iNode.getName());
                 ConfigWrap.colors().remove(iNode);
             });
 
@@ -82,12 +82,12 @@ public class NodeManager
     public static void registerColor(MoreColorNode iColorNode)
     {
         // DataResult checked at initialization
-        MoreColors.debugLog("registerColors(): register ColorNode: {} // {}", iColorNode.getName(), iColorNode.getHexCode());
+        MoreColor.debugLog("registerColors(): register ColorNode: {} // {}", iColorNode.getName(), iColorNode.getHexCode());
         TextColor finalIColorNode = iColorNode.getColor();
 
         if (checkIfRegistered(iColorNode))
         {
-            MoreColors.debugLog("registerColors(): A tag named \"{}\" is already registered.", iColorNode.getName());
+            MoreColor.debugLog("registerColors(): A tag named \"{}\" is already registered.", iColorNode.getName());
             REMOVE.add(iColorNode);
             return;
         }

@@ -22,7 +22,7 @@ package com.sakuraryoko.morecolors.impl.config.data.options;
 
 import org.jetbrains.annotations.ApiStatus;
 
-import com.sakuraryoko.morecolors.api.config.IConfigOption;
+import com.sakuraryoko.corelib.api.config.IConfigOption;
 
 @ApiStatus.Internal
 public class MainOptions implements IConfigOption

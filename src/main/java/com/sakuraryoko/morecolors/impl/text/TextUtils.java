@@ -24,18 +24,22 @@ package com.sakuraryoko.morecolors.impl.text;
 //$$ import eu.pb4.placeholders.api.ParserContext;
 //#else
 //#endif
+import javax.annotation.Nonnull;
 import eu.pb4.placeholders.api.TextParserUtils;
-import org.jetbrains.annotations.ApiStatus;
 
 import net.minecraft.network.chat.Component;
+
+import com.sakuraryoko.corelib.api.text.ITextHandler;
 
 //#if MC >= 12006
 //$$ @SuppressWarnings("deprecation")
 //#else
 //#endif
-@ApiStatus.Internal
-public class TextUtils
+public class TextUtils implements ITextHandler
 {
+    private static final TextUtils INSTANCE = new TextUtils();
+    public static TextUtils getInstance() { return INSTANCE; }
+
     //#if MC >= 12006
     //$$ public static final boolean LEGACY = false;
     //#else
@@ -43,16 +47,15 @@ public class TextUtils
     //#endif
 
     //#if MC >= 12006
-    //$$ @ApiStatus.Internal
-    //$$ public static Component formatText(String str, ParserContext ctx)
+    //$$ public Component formatText(String str, ParserContext ctx)
     //$$ {
-    //$$ return TextParser.PARSE.parseText(str, ctx);
+        //$$ return TextParser.PARSE.parseText(str, ctx);
     //$$ }
     //#else
     //#endif
 
-    @ApiStatus.Internal
-    public static Component formatText(String str)
+    @Override
+    public Component formatText(@Nonnull String str)
     {
         if (LEGACY)
         {
@@ -66,8 +69,8 @@ public class TextUtils
         //#endif
     }
 
-    @ApiStatus.Internal
-    public static Component formatTextSafe(String str)
+    @Override
+    public Component formatTextSafe(@Nonnull String str)
     {
         if (LEGACY)
         {
@@ -81,8 +84,8 @@ public class TextUtils
         //#endif
     }
 
-    @ApiStatus.Internal
-    public static Component of(String str)
+    @Override
+    public Component of(@Nonnull String str)
     {
         return Component.literal(str);
     }

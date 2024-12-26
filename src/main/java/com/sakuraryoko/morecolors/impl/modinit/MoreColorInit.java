@@ -20,30 +20,41 @@
 
 package com.sakuraryoko.morecolors.impl.modinit;
 
-import com.sakuraryoko.morecolors.api.modinit.IModInitDispatcher;
-import com.sakuraryoko.morecolors.api.modinit.ModData;
-import com.sakuraryoko.morecolors.impl.MoreColors;
+import com.sakuraryoko.corelib.api.modinit.IModInitDispatcher;
+import com.sakuraryoko.corelib.api.modinit.ModInitData;
+import com.sakuraryoko.corelib.api.text.ITextHandler;
+import com.sakuraryoko.corelib.impl.commands.CommandManager;
+import com.sakuraryoko.corelib.impl.config.ConfigManager;
+import com.sakuraryoko.morecolors.impl.MoreColor;
 import com.sakuraryoko.morecolors.impl.Reference;
-import com.sakuraryoko.morecolors.coreimpl.commands.CommandManager;
 import com.sakuraryoko.morecolors.impl.commands.MoreColorsCommand;
-import com.sakuraryoko.morecolors.coreimpl.config.ConfigManager;
 import com.sakuraryoko.morecolors.impl.config.ConfigWrap;
 import com.sakuraryoko.morecolors.impl.config.MoreColorConfigHandler;
+import com.sakuraryoko.morecolors.impl.text.TextUtils;
 //#if MC >= 12006
 //$$ import com.sakuraryoko.morecolors.impl.text.TextParser;
 //#else
 //#endif
 
-public class MoreColorsInit implements IModInitDispatcher
+public class MoreColorInit implements IModInitDispatcher
 {
-    private static final MoreColorsInit INSTANCE = new MoreColorsInit();
-    public static MoreColorsInit getInstance() { return INSTANCE; }
-    private static final ModData MOD_DATA = new ModData(Reference.MOD_ID);
+    private static final MoreColorInit INSTANCE = new MoreColorInit();
+
+    public static MoreColorInit getInstance() {return INSTANCE;}
+
+    private final ModInitData MOD_DATA;
+    private boolean INIT = false;
+
+    public MoreColorInit()
+    {
+        this.MOD_DATA = new ModInitData(Reference.MOD_ID);
+        this.MOD_DATA.setTextHandler(this.getTextHandler());
+    }
 
     @Override
-    public ModData getModInit()
+    public ModInitData getModInit()
     {
-        return MOD_DATA;
+        return this.MOD_DATA;
     }
 
     @Override
@@ -53,9 +64,21 @@ public class MoreColorsInit implements IModInitDispatcher
     }
 
     @Override
+    public ITextHandler getTextHandler()
+    {
+        return TextUtils.getInstance();
+    }
+
+    @Override
     public boolean isDebug()
     {
         return Reference.DEBUG || ConfigWrap.opt().debugMode;
+    }
+
+    @Override
+    public boolean isInitComplete()
+    {
+        return this.INIT;
     }
 
     @Override
@@ -67,13 +90,13 @@ public class MoreColorsInit implements IModInitDispatcher
     @Override
     public void onModInit()
     {
-        MoreColors.debugLog("Initializing Mod.");
-        for (String s : this.getBasic(ModData.BASIC_INFO))
+        MoreColor.debugLog("Initializing Mod.");
+        for (String s : this.getBasic(ModInitData.BASIC_INFO))
         {
-            MoreColors.LOGGER.info(s);
+            MoreColor.LOGGER.info(s);
         }
 
-        MoreColors.debugLog("Config Initializing.");
+        MoreColor.debugLog("Config Initializing.");
         ConfigManager.getInstance().registerConfigDispatcher(MoreColorConfigHandler.getInstance());
 
         //#if MC >= 12006
@@ -82,7 +105,8 @@ public class MoreColorsInit implements IModInitDispatcher
         //#else
         //#endif
 
-        MoreColors.debugLog("Registering Commands.");
+        MoreColor.debugLog("Registering Commands.");
         CommandManager.getInstance().registerCommandHandler(new MoreColorsCommand());
+        this.INIT = true;
     }
 }

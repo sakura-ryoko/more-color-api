@@ -25,17 +25,16 @@ import java.util.List;
 import com.google.gson.annotations.SerializedName;
 import org.jetbrains.annotations.ApiStatus;
 
-import com.sakuraryoko.morecolors.impl.Reference;
+import com.sakuraryoko.corelib.api.config.IConfigData;
 import com.sakuraryoko.morecolors.impl.config.data.options.MainOptions;
-import com.sakuraryoko.morecolors.api.config.IConfigData;
-import com.sakuraryoko.morecolors.impl.modinit.MoreColorsInit;
+import com.sakuraryoko.morecolors.impl.modinit.MoreColorInit;
 import com.sakuraryoko.morecolors.impl.nodes.MoreColorNode;
 
 @ApiStatus.Internal
 public class MoreColorData implements IConfigData
 {
     @SerializedName("___comment")
-    public String comment = MoreColorsInit.getInstance().getModVersionString() + " Config";
+    public String comment = MoreColorInit.getInstance().getModVersionString() + " Config";
 
     @SerializedName("config_date")
     public String config_date;

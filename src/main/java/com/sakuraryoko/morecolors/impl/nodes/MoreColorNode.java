@@ -31,7 +31,7 @@ import org.jetbrains.annotations.Nullable;
 //#endif
 import net.minecraft.network.chat.TextColor;
 
-import com.sakuraryoko.morecolors.impl.MoreColors;
+import com.sakuraryoko.morecolors.impl.MoreColor;
 
 @ApiStatus.Internal
 public class MoreColorNode
@@ -108,7 +108,7 @@ public class MoreColorNode
             this.hexCode = hexCode;
         }
         else {
-            MoreColors.LOGGER.warn("MoreColor({}) unhandled error (color is null)", name);
+            MoreColor.LOGGER.warn("MoreColor({}) unhandled error (color is null)", name);
             this.name = "";
             this.hexCode = "";
         }
@@ -124,7 +124,7 @@ public class MoreColorNode
             this.aliases = aliases;
         }
         else {
-            MoreColors.LOGGER.warn("MoreColor({}) unhandled error (color is null)", name);
+            MoreColor.LOGGER.warn("MoreColor({}) unhandled error (color is null)", name);
             this.name = "";
             this.hexCode = "";
         }

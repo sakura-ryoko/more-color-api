@@ -20,9 +20,7 @@
 
 package com.sakuraryoko.morecolors.impl.commands;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 import javax.annotation.Nullable;
 import me.lucko.fabric.api.permissions.v0.Permissions;
 import org.jetbrains.annotations.ApiStatus;
@@ -35,13 +33,14 @@ import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
 
-import com.sakuraryoko.morecolors.api.modinit.ModData;
-import com.sakuraryoko.morecolors.impl.MoreColors;
-import com.sakuraryoko.morecolors.api.commands.IServerCommand;
-import com.sakuraryoko.morecolors.coreimpl.config.ConfigManager;
+import com.sakuraryoko.corelib.api.commands.IServerCommand;
+import com.sakuraryoko.corelib.api.modinit.ModInitData;
+import com.sakuraryoko.corelib.impl.config.ConfigManager;
+import com.sakuraryoko.morecolors.impl.MoreColor;
+import com.sakuraryoko.morecolors.impl.Reference;
 import com.sakuraryoko.morecolors.impl.config.ConfigWrap;
 import com.sakuraryoko.morecolors.impl.config.MoreColorConfigHandler;
-import com.sakuraryoko.morecolors.impl.modinit.MoreColorsInit;
+import com.sakuraryoko.morecolors.impl.modinit.MoreColorInit;
 import com.sakuraryoko.morecolors.impl.nodes.MoreColorNode;
 import com.sakuraryoko.morecolors.impl.nodes.NodeManager;
 import com.sakuraryoko.morecolors.impl.text.FormattingExample;
@@ -109,10 +108,15 @@ public class MoreColorsCommand implements IServerCommand
         return "morecolors";
     }
 
+    @Override
+    public String getModId()
+    {
+        return Reference.MOD_ID;
+    }
+
     private int about(CommandSourceStack src, CommandContext<CommandSourceStack> context)
     {
-        //Component info = ModInfo.getModInfoText();
-        List<Component> info = MoreColorsInit.getInstance().getFormatted(ModData.ALL_INFO);
+        List<Component> info = MoreColorInit.getInstance().getPlaceholderFormatted(ModInitData.ALL_INFO);
         String user = src.getTextName();
 
         for (Component entry : info)
@@ -124,7 +128,7 @@ public class MoreColorsCommand implements IServerCommand
             //#endif
         }
 
-        MoreColors.debugLog("{} has executed /morecolors .", user);
+        MoreColor.debugLog("{} has executed /morecolors .", user);
         return 1;
     }
 
@@ -161,7 +165,7 @@ public class MoreColorsCommand implements IServerCommand
         }
         context.getSource().sendSuccess(FormattingExample.getClipboardMessage(), false);
         //#endif
-        MoreColors.debugLog("{} has executed /morecolors example .", user);
+        MoreColor.debugLog("{} has executed /morecolors example .", user);
         return 1;
     }
 
@@ -192,19 +196,19 @@ public class MoreColorsCommand implements IServerCommand
 
         if (newNode.getColor() != null && !NodeManager.checkIfRegistered(newNode))
         {
-            MoreColors.debugLog("New Node Debug: [{}]", newNode.toString());
+            MoreColor.debugLog("New Node Debug: [{}]", newNode.toString());
 
             ConfigWrap.colors().add(newNode);
             NodeManager.registerColor(newNode);
 
-            Component result = TextUtils.formatText("More Color Node added successfully\n" + "Test (Click to copy): " + "<r><copy:'<" + newNode.getName() + ">'><" + newNode.getName() + ">" + newNode.getName() + "<r>");
+            Component result = TextUtils.getInstance().formatText("More Color Node added successfully\n" + "Test (Click to copy): " + "<r><copy:'<" + newNode.getName() + ">'><" + newNode.getName() + ">" + newNode.getName() + "<r>");
 
             //#if MC >= 12001
             //$$ context.getSource().sendSuccess(() -> result, false);
             //#else
             context.getSource().sendSuccess(result, false);
             //#endif
-            MoreColors.LOGGER.info("{} has added a new color node [{}] to the configuration.", user, newNode.getName());
+            MoreColor.LOGGER.info("{} has added a new color node [{}] to the configuration.", user, newNode.getName());
 
             return 1;
         }
@@ -223,7 +227,7 @@ public class MoreColorsCommand implements IServerCommand
         //#else
         context.getSource().sendSuccess(Component.literal("Reloaded config!"), false);
         //#endif
-        MoreColors.LOGGER.info("{} has reloaded the configuration.", user);
+        MoreColor.LOGGER.info("{} has reloaded the configuration.", user);
         return 1;
     }
 
@@ -236,7 +240,7 @@ public class MoreColorsCommand implements IServerCommand
         //#else
         context.getSource().sendSuccess(Component.literal("Saved config!"), false);
         //#endif
-        MoreColors.LOGGER.info("{} has saved the configuration.", user);
+        MoreColor.LOGGER.info("{} has saved the configuration.", user);
         return 1;
     }
 
@@ -249,7 +253,7 @@ public class MoreColorsCommand implements IServerCommand
         //#else
         context.getSource().sendSuccess(Component.literal("Loading Config Defaults!"), false);
         //#endif
-        MoreColors.LOGGER.info("{} has loaded the default configuration.", user);
+        MoreColor.LOGGER.info("{} has loaded the default configuration.", user);
         return 1;
     }
 }

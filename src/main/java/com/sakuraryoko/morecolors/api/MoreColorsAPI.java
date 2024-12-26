@@ -28,7 +28,7 @@ import javax.annotation.Nullable;
 
 import net.minecraft.network.chat.Component;
 
-import com.sakuraryoko.morecolors.impl.MoreColors;
+import com.sakuraryoko.morecolors.impl.MoreColor;
 import com.sakuraryoko.morecolors.impl.config.ConfigWrap;
 import com.sakuraryoko.morecolors.impl.nodes.MoreColorNode;
 import com.sakuraryoko.morecolors.impl.nodes.NodeManager;
@@ -75,14 +75,14 @@ public interface MoreColorsAPI
 
         if (newNode.getColor() != null)
         {
-            MoreColors.debugLog("New Node Debug: [{}]", newNode.toString());
+            MoreColor.debugLog("New Node Debug: [{}]", newNode.toString());
 
             ConfigWrap.colors().add(newNode);
             NodeManager.registerColor(newNode);
 
-            return TextUtils.formatText("More Color Node added successfully\n"
-                                                + "Test (Click to copy): "
-                                                + "<r><copy:'<" + newNode.getName() + ">'><" + newNode.getName() + ">" + newNode.getName() + "<r>");
+            return TextUtils.getInstance().formatText("More Color Node added successfully\n"
+                                                      + "Test (Click to copy): "
+                                                      + "<r><copy:'<" + newNode.getName() + ">'><" + newNode.getName() + ">" + newNode.getName() + "<r>");
         }
 
         return Component.empty();
@@ -90,17 +90,17 @@ public interface MoreColorsAPI
 
     static Component formatTextSafe(@Nonnull String str)
     {
-        return TextUtils.formatTextSafe(str);
+        return TextUtils.getInstance().formatTextSafe(str);
     }
 
     static Component formatText(@Nonnull String str)
     {
-        return TextUtils.formatText(str);
+        return TextUtils.getInstance().formatText(str);
     }
 
     static Component of(@Nonnull String str)
     {
-        return TextUtils.of(str);
+        return TextUtils.getInstance().of(str);
     }
 
     static Component getBuiltInFormattingTest()

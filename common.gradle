@@ -30,7 +30,7 @@ dependencies {
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
 	// External Dependencies
-	implementation "com.google.code.gson:gson:${project.gson_version}"
+	//implementation "com.google.code.gson:gson:${project.gson_version}"
 	implementation "com.google.code.findbugs:jsr305:3.0.2"
 
 	// runtime mods
@@ -48,6 +48,7 @@ dependencies {
 	include(annotationProcessor(implementation("io.github.llamalad7:mixinextras-fabric:${project.mixinextras_version}")))
 
 	// MoreColorAPI Specific
+	modImplementation include("com.github.sakura-ryoko.corelib:corelib-mc${project.minecraft_version}:${project.corelib_version}")
 	modImplementation include("me.lucko:fabric-permissions-api:${project.fabric_permissions_api_version}")
 	modImplementation "eu.pb4:placeholder-api:${project.placeholder_api_version}"
 }

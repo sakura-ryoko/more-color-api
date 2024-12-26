@@ -18,14 +18,4 @@
  * along with MoreColorAPI.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.sakuraryoko.morecolors.coreimpl.events.players;
-
-import com.mojang.authlib.GameProfile;
-import net.minecraft.server.level.ServerPlayer;
-
-import com.sakuraryoko.morecolors.api.events.IPlayerEventsDispatch;
-
-public interface IPlayerEventsManager
-{
-    void registerPlayerEvents(IPlayerEventsDispatch handler) throws RuntimeException;
-}
+package com.sakuraryoko.morecolors.impl.mixin;

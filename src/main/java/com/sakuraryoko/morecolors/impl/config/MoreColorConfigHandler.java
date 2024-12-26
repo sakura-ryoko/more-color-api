@@ -28,13 +28,13 @@ import java.util.Locale;
 
 import org.jetbrains.annotations.ApiStatus;
 
-import com.sakuraryoko.morecolors.impl.MoreColors;
+import com.sakuraryoko.corelib.api.config.IConfigData;
+import com.sakuraryoko.corelib.api.config.IConfigDispatch;
+import com.sakuraryoko.morecolors.impl.MoreColor;
 import com.sakuraryoko.morecolors.impl.Reference;
 import com.sakuraryoko.morecolors.impl.config.data.MoreColorData;
 import com.sakuraryoko.morecolors.impl.config.data.options.MainOptions;
-import com.sakuraryoko.morecolors.api.config.IConfigData;
-import com.sakuraryoko.morecolors.api.config.IConfigDispatch;
-import com.sakuraryoko.morecolors.impl.modinit.MoreColorsInit;
+import com.sakuraryoko.morecolors.impl.modinit.MoreColorInit;
 import com.sakuraryoko.morecolors.impl.nodes.MoreColorNode;
 import com.sakuraryoko.morecolors.impl.nodes.NodeManager;
 
@@ -128,7 +128,7 @@ public class MoreColorConfigHandler implements IConfigDispatch
     public MoreColorData defaults()
     {
         MoreColorData config = this.newConfig();
-        MoreColors.debugLog("MoreColorConfigHandler#defaults(): Setting default config.");
+        MoreColor.debugLog("MoreColorConfigHandler#defaults(): Setting default config.");
 
         // Set default values
         config.config_date = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH.mm.ss", Locale.ROOT).format(ZonedDateTime.now());
@@ -180,12 +180,12 @@ public class MoreColorConfigHandler implements IConfigDispatch
     public MoreColorData update(IConfigData newConfig)
     {
         MoreColorData newConf = (MoreColorData) newConfig;
-        MoreColors.debugLog("MoreColorConfigHandler#update(): Refresh config.");
+        MoreColor.debugLog("MoreColorConfigHandler#update(): Refresh config.");
 
         // Refresh
-        CONFIG.comment = MoreColorsInit.getInstance().getModVersionString() + " Config";
+        CONFIG.comment = MoreColorInit.getInstance().getModVersionString() + " Config";
         CONFIG.config_date = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH.mm.ss", Locale.ROOT).format(ZonedDateTime.now());
-        MoreColors.debugLog("MoreColorConfigHandler#update(): save_date: {} --> {}", newConf.config_date, CONFIG.config_date);
+        MoreColor.debugLog("MoreColorConfigHandler#update(): save_date: {} --> {}", newConf.config_date, CONFIG.config_date);
 
         // Copy Main Config
         CONFIG.MAIN.copy(newConf.MAIN);
@@ -200,10 +200,10 @@ public class MoreColorConfigHandler implements IConfigDispatch
     @Override
     public void execute(boolean fromInit)
     {
-        MoreColors.debugLog("MoreColorConfigHandler#execute(): Execute config.");
+        MoreColor.debugLog("MoreColorConfigHandler#execute(): Execute config.");
 
         // Do this when the Config gets finalized.
-        MoreColors.debugLog("MoreColorConfigHandler#execute(): new config_date: {}", CONFIG.config_date);
+        MoreColor.debugLog("MoreColorConfigHandler#execute(): new config_date: {}", CONFIG.config_date);
 
         // Register Nodes (fromInit = true means remove invalid Colors from Config)
         NodeManager.registerNodes(fromInit);

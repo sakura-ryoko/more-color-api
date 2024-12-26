@@ -27,7 +27,7 @@ import org.jetbrains.annotations.ApiStatus;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 
-import com.sakuraryoko.morecolors.impl.MoreColors;
+import com.sakuraryoko.morecolors.impl.MoreColor;
 import com.sakuraryoko.morecolors.impl.config.ConfigWrap;
 import com.sakuraryoko.morecolors.impl.nodes.MoreColorNode;
 import com.sakuraryoko.morecolors.impl.nodes.NodeManager;
@@ -56,8 +56,8 @@ public class FormattingExample
             }
         }
 
-        MoreColors.debugLog("FormatTest.runBuiltInTest() --> testString: {}", testString.toString());
-        return TextUtils.formatText(testString.toString());
+        MoreColor.debugLog("FormatTest.runBuiltInTest() --> testString: {}", testString.toString());
+        return TextUtils.getInstance().formatText(testString.toString());
     }
 
     public static Component runPlaceholderAPITest()
@@ -82,8 +82,8 @@ public class FormattingExample
             testString.append("<r> <copy:'<").append(node).append(">'><").append(node).append(">").append(node);
         }
 
-        MoreColors.debugLog("FormatTest.runAliasTest() --> testString: {}", testString.toString());
-        return TextUtils.formatText(testString.toString());
+        MoreColor.debugLog("FormatTest.runAliasTest() --> testString: {}", testString.toString());
+        return TextUtils.getInstance().formatText(testString.toString());
     }
 
     public static Component runMoreColorsTest()
@@ -101,8 +101,8 @@ public class FormattingExample
             testString.append("<r> <copy:'<").append(iNode.getName()).append(">'><").append(iNode.getName()).append(">").append(iNode.getName());
         }
 
-        MoreColors.debugLog("FormatTest.runColorsTest() --> testString: {}", testString.toString());
-        return TextUtils.formatText(testString.toString());
+        MoreColor.debugLog("FormatTest.runColorsTest() --> testString: {}", testString.toString());
+        return TextUtils.getInstance().formatText(testString.toString());
     }
 
     public static Component getClipboardMessage()
@@ -115,6 +115,6 @@ public class FormattingExample
         testString = "<r>\n<i><underline><gray>* You can click on most of these options to copy the tag to your Clipboard ***";
         //#endif
 
-        return TextUtils.formatText(testString);
+        return TextUtils.getInstance().formatText(testString);
     }
 }
