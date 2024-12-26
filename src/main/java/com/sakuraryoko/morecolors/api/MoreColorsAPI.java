@@ -28,15 +28,81 @@ import javax.annotation.Nullable;
 
 import net.minecraft.network.chat.Component;
 
-import com.sakuraryoko.morecolors.MoreColors;
-import com.sakuraryoko.morecolors.config.ConfigWrap;
-import com.sakuraryoko.morecolors.nodes.MoreColorNode;
-import com.sakuraryoko.morecolors.nodes.NodeManager;
-import com.sakuraryoko.morecolors.text.FormattingExample;
-import com.sakuraryoko.morecolors.text.TextUtils;
+import com.sakuraryoko.morecolors.impl.MoreColors;
+import com.sakuraryoko.morecolors.impl.config.ConfigWrap;
+import com.sakuraryoko.morecolors.impl.nodes.MoreColorNode;
+import com.sakuraryoko.morecolors.impl.nodes.NodeManager;
+import com.sakuraryoko.morecolors.impl.text.FormattingExample;
+import com.sakuraryoko.morecolors.impl.text.TextUtils;
 
 public interface MoreColorsAPI
 {
+    static boolean isMoreColorNode(@Nonnull String node)
+    {
+        return NodeManager.isMoreColorNode(node);
+    }
+
+    static Component addColorNode(@Nonnull String name, @Nonnull String hexCode, @Nullable List<String> aliases)
+    {
+        if (name.isEmpty())
+        {
+            return Component.empty();
+        }
+        if (hexCode.isEmpty())
+        {
+            return Component.empty();
+        }
+        if (NodeManager.isMoreColorNode(name))
+        {
+            return Component.empty();
+        }
+
+        if (hexCode.charAt(0) != '#')
+        {
+            hexCode = "#" + hexCode.toUpperCase(Locale.ROOT);
+        }
+
+        MoreColorNode newNode;
+
+        if (aliases == null || aliases.isEmpty())
+        {
+            newNode = new MoreColorNode(name, hexCode);
+        }
+        else
+        {
+            newNode = new MoreColorNode(name, hexCode, aliases);
+        }
+
+        if (newNode.getColor() != null)
+        {
+            MoreColors.debugLog("New Node Debug: [{}]", newNode.toString());
+
+            ConfigWrap.colors().add(newNode);
+            NodeManager.registerColor(newNode);
+
+            return TextUtils.formatText("More Color Node added successfully\n"
+                                                + "Test (Click to copy): "
+                                                + "<r><copy:'<" + newNode.getName() + ">'><" + newNode.getName() + ">" + newNode.getName() + "<r>");
+        }
+
+        return Component.empty();
+    }
+
+    static Component formatTextSafe(@Nonnull String str)
+    {
+        return TextUtils.formatTextSafe(str);
+    }
+
+    static Component formatText(@Nonnull String str)
+    {
+        return TextUtils.formatText(str);
+    }
+
+    static Component of(@Nonnull String str)
+    {
+        return TextUtils.of(str);
+    }
+
     static Component getBuiltInFormattingTest()
     {
         return FormattingExample.runBuiltInTest();
@@ -67,47 +133,5 @@ public interface MoreColorsAPI
         list.add(FormattingExample.getClipboardMessage());
 
         return list;
-    }
-
-    static boolean isMoreColorNode(String node)
-    {
-        return NodeManager.isMoreColorNode(node);
-    }
-
-    static Component addColorNode(@Nonnull String name, @Nonnull String hexCode, @Nullable List<String> aliases)
-    {
-        if (name.isEmpty()) return Component.empty();
-        if (hexCode.isEmpty()) return Component.empty();
-        if (NodeManager.isMoreColorNode(name)) return Component.empty();
-
-        if (hexCode.charAt(0) != '#')
-        {
-            hexCode = "#"+hexCode.toUpperCase(Locale.ROOT);
-        }
-
-        MoreColorNode newNode;
-
-        if (aliases == null || aliases.isEmpty())
-        {
-            newNode = new MoreColorNode(name, hexCode);
-        }
-        else
-        {
-            newNode = new MoreColorNode(name, hexCode, aliases);
-        }
-
-        if (newNode.getColor() != null)
-        {
-            MoreColors.debugLog("New Node Debug: [{}]", newNode.toString());
-
-            ConfigWrap.colors().add(newNode);
-            NodeManager.registerColor(newNode);
-
-            return TextUtils.formatText("More Color Node added successfully\n"
-                                            + "Test (Click to copy): "
-                                            + "<r><copy:'<" + newNode.getName() + ">'><" + newNode.getName() + ">" + newNode.getName() + "<r>");
-        }
-
-        return Component.empty();
     }
 }

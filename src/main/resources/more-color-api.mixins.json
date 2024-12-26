@@ -1,14 +1,18 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "com.sakuraryoko.morecolors.mixin",
+  "package": "com.sakuraryoko.morecolors.coreimpl.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "MixinCommands",
-    "MixinMinecraftServer"
+    "MixinDedicatedServer",
+    "MixinMinecraftServer",
+    "MixinPlayerList"
   ],
   "client": [
-    "MixinIntegratedServer"
+    "MixinClientPacketListener",
+    "MixinIntegratedServer",
+    "MixinMinecraft"
   ],
   "server": [],
   "injectors": {
