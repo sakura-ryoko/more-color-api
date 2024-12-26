@@ -100,7 +100,7 @@ public class MoreColorInit implements IModInitDispatcher
         ConfigManager.getInstance().registerConfigDispatcher(MoreColorConfigHandler.getInstance());
 
         //#if MC >= 12006
-        //$$ MoreColors.debugLog("Building Text Parser.");
+        //$$ MoreColor.debugLog("Building Text Parser.");
         //$$ TextParser.build();
         //#else
         //#endif

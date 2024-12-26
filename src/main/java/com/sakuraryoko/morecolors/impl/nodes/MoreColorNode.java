@@ -56,14 +56,14 @@ public class MoreColorNode
             //$$ }
             //$$ else
             //$$ {
-                //$$ MoreColors.LOGGER.warn("MoreColor({}) unhandled error (color is null)", name);
+                //$$ MoreColor.LOGGER.warn("MoreColor({}) unhandled error (color is null)", name);
                 //$$ this.name = "";
                 //$$ this.hexCode = "";
             //$$ }
         //$$ }
         //$$ else
         //$$ {
-            //$$ MoreColors.LOGGER.warn("MoreColor({}) is Invalid, error: {}", name, dr.error().toString());
+            //$$ MoreColor.LOGGER.warn("MoreColor({}) is Invalid, error: {}", name, dr.error().toString());
             //$$ this.name = "";
             //$$ this.hexCode = "";
             //$$ this.color = null;
@@ -85,14 +85,14 @@ public class MoreColorNode
             //$$ }
             //$$ else
             //$$ {
-                //$$ MoreColors.LOGGER.warn("MoreColor({}) unhandled error (color is null)", name);
+                //$$ MoreColor.LOGGER.warn("MoreColor({}) unhandled error (color is null)", name);
                 //$$ this.name = "";
                 //$$ this.hexCode = "";
             //$$ }
         //$$ }
         //$$ else
         //$$ {
-            //$$ MoreColors.LOGGER.warn("MoreColor({}) is Invalid, error: {}", name, dr.error().toString());
+            //$$ MoreColor.LOGGER.warn("MoreColor({}) is Invalid, error: {}", name, dr.error().toString());
             //$$ this.name = "";
             //$$ this.hexCode = "";
             //$$ this.color = null;
