@@ -20,16 +20,13 @@
 
 package com.sakuraryoko.morecolors.impl.config;
 
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
-
 import org.jetbrains.annotations.ApiStatus;
 
 import com.sakuraryoko.corelib.api.config.IConfigData;
 import com.sakuraryoko.corelib.api.config.IConfigDispatch;
+import com.sakuraryoko.corelib.api.time.TimeFormat;
 import com.sakuraryoko.morecolors.impl.MoreColor;
 import com.sakuraryoko.morecolors.impl.Reference;
 import com.sakuraryoko.morecolors.impl.config.data.MoreColorData;
@@ -45,7 +42,7 @@ public class MoreColorConfigHandler implements IConfigDispatch
     public static MoreColorConfigHandler getInstance() { return INSTANCE; }
     private final MoreColorData CONFIG = newConfig();
     private final String CONFIG_ROOT = Reference.MOD_ID;
-    private final String CONFIG_NAME = "more_colors";
+    private final String CONFIG_NAME = Reference.MOD_ID;
     private boolean loaded = false;
 
     @Override
@@ -131,7 +128,7 @@ public class MoreColorConfigHandler implements IConfigDispatch
         MoreColor.debugLog("MoreColorConfigHandler#defaults(): Setting default config.");
 
         // Set default values
-        config.config_date = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH.mm.ss", Locale.ROOT).format(ZonedDateTime.now());
+        config.config_date = TimeFormat.RFC1123.formatNow(null);
         config.MAIN.defaults();
 
         // Some of these are possibly in use; but remove them later if they are.
@@ -184,7 +181,7 @@ public class MoreColorConfigHandler implements IConfigDispatch
 
         // Refresh
         CONFIG.comment = MoreColorInit.getInstance().getModVersionString() + " Config";
-        CONFIG.config_date = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH.mm.ss", Locale.ROOT).format(ZonedDateTime.now());
+        CONFIG.config_date = TimeFormat.RFC1123.formatNow(null);
         MoreColor.debugLog("MoreColorConfigHandler#update(): save_date: {} --> {}", newConf.config_date, CONFIG.config_date);
 
         // Copy Main Config

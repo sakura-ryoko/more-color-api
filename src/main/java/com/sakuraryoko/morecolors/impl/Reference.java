@@ -23,5 +23,5 @@ package com.sakuraryoko.morecolors.impl;
 public class Reference
 {
     public static final String MOD_ID = "more-color-api";
-    public static final boolean DEBUG = true;
+    public static final boolean DEBUG = false;
 }

@@ -52,7 +52,6 @@ import static net.minecraft.commands.Commands.literal;
 @ApiStatus.Internal
 public class MoreColorsCommand implements IServerCommand
 {
-    //public static final MoreColorsCommand INSTANCE = new MoreColorsCommand();
     @Override
     public void register(CommandDispatcher<CommandSourceStack> dispatcher, CommandBuildContext registryAccess, Commands.CommandSelection environment)
     {

@@ -20,6 +20,8 @@
 
 package com.sakuraryoko.morecolors.impl.modinit;
 
+import org.jetbrains.annotations.ApiStatus;
+
 import com.sakuraryoko.corelib.api.modinit.IModInitDispatcher;
 import com.sakuraryoko.corelib.api.modinit.ModInitData;
 import com.sakuraryoko.corelib.api.text.ITextHandler;
@@ -36,11 +38,11 @@ import com.sakuraryoko.morecolors.impl.text.TextUtils;
 //#else
 //#endif
 
+@ApiStatus.Internal
 public class MoreColorInit implements IModInitDispatcher
 {
     private static final MoreColorInit INSTANCE = new MoreColorInit();
-
-    public static MoreColorInit getInstance() {return INSTANCE;}
+    public static MoreColorInit getInstance() { return INSTANCE; }
 
     private final ModInitData MOD_DATA;
     private boolean INIT = false;
