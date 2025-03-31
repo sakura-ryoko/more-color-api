@@ -57,10 +57,12 @@ public class TextUtils implements ITextHandler
     @Override
     public Component formatText(@Nonnull String str)
     {
+        //#if MC <= 12104
         if (LEGACY)
         {
             return TextParserUtils.formatText(str);
         }
+        //#endif
 
         //#if MC >= 12006
         //$$ return TextParser.PARSE.parseNode(str).toText();
@@ -72,10 +74,12 @@ public class TextUtils implements ITextHandler
     @Override
     public Component formatTextSafe(@Nonnull String str)
     {
+        //#if MC <= 12104
         if (LEGACY)
         {
             return TextParserUtils.formatTextSafe(str);
         }
+        //#endif
 
         //#if MC >= 12006
         //$$ return TextParser.PARSE.parseNode(str).toText();

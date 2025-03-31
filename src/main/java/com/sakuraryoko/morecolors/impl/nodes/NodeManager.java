@@ -94,6 +94,7 @@ public class NodeManager
 
         if (iColorNode.getAliases() != null)
         {
+//#if MC <= 12104
             if (TextUtils.LEGACY)
             {
                 // Legacy Parser
@@ -107,6 +108,7 @@ public class NodeManager
                         )
                 );
             }
+//#endif
             // New Code
 //#if MC >= 12006
             //$$ TagRegistry.registerDefault(
@@ -125,6 +127,7 @@ public class NodeManager
         }
         else
         {
+//#if MC <= 12104
             if (TextUtils.LEGACY)
             {
                 // Legacy Parser
@@ -138,6 +141,7 @@ public class NodeManager
                         )
                 );
             }
+//#endif
             // New Code
 //#if MC >= 12006
             //$$ TagRegistry.registerDefault(
@@ -181,6 +185,7 @@ public class NodeManager
     @ApiStatus.Internal
     public static boolean checkIfRegistered(MoreColorNode colorNode)
     {
+//#if MC <= 12104
         if (TextUtils.LEGACY)
         {
             // Check if it already exists
@@ -200,6 +205,7 @@ public class NodeManager
                 return true;
             }
         }
+//#endif
 //#if MC >= 12006
         // Check if it already exists
         //$$ if (TagRegistry.DEFAULT.getTag(colorNode.getName()) != null)
@@ -217,6 +223,7 @@ public class NodeManager
     {
         List<String> nodes = new ArrayList<>();
 
+//#if MC <= 12104
         if (TextUtils.LEGACY)
         {
             TextParserV1.DEFAULT.getTags().forEach((tag) ->
@@ -227,6 +234,7 @@ public class NodeManager
                 }
             });
         }
+//#endif
 
 //#if MC >= 12006
         //$$ TagRegistry.DEFAULT.getTags().forEach((tag) ->
@@ -244,6 +252,7 @@ public class NodeManager
     }
 
     // Copied wrap() from TextTags.java
+    //#if MC <= 12104
     @ApiStatus.Internal
     private static TextParserV1.TagNodeBuilder wrap(Wrapper wrapper)
     {
@@ -260,4 +269,5 @@ public class NodeManager
     {
         TextNode wrap(TextNode[] nodes, String arg);
     }
+//#endif
 }
