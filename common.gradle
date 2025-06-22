@@ -15,6 +15,9 @@ repositories {
 	maven {
 		url = "https://maven.nucleoid.xyz/"
 	}
+	maven {
+		url = "https://oss.sonatype.org/content/repositories/snapshots"
+	}
 }
 
 // https://github.com/FabricMC/fabric-loader/issues/783
@@ -38,7 +41,7 @@ dependencies {
 //		modRuntimeOnly(mcVersion < 11900 ? "com.github.astei:lazydfu:0.1.2" : "com.github.Fallen-Breath:lazydfu:a7cfc44c0c")
 //	}
 	// [FEATURE] MIXIN_AUDITOR
-	modRuntimeOnly 'me.fallenbreath:mixin-auditor:0.1.0'
+//	modRuntimeOnly 'me.fallenbreath:mixin-auditor:0.1.0'
 
 	// dependencies
 	include(modApi(fabricApi.module("fabric-resource-loader-v0", project.fabric_api_version)))
@@ -75,14 +78,14 @@ loom {
 		vmArgs commonVmArgs
 	}
 	// [FEATURE] MIXIN_AUDITOR
-	runs {
-		def auditVmArgs = [*commonVmArgs, '-DmixinAuditor.audit=true']
-		serverMixinAudit {
-			server()
-			vmArgs auditVmArgs
-			ideConfigGenerated false
-		}
-	}
+//	runs {
+//		def auditVmArgs = [*commonVmArgs, '-DmixinAuditor.audit=true']
+//		serverMixinAudit {
+//			server()
+//			vmArgs auditVmArgs
+//			ideConfigGenerated false
+//		}
+//	}
 }
 
 String modVersionSuffix = ''
