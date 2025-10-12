@@ -20,8 +20,11 @@
 
 package com.sakuraryoko.morecolors.impl;
 
+import org.jetbrains.annotations.ApiStatus;
+
+@ApiStatus.Internal
 public class Reference
 {
-    public static final String MOD_ID = "more-color-api";
-    public static final boolean DEBUG = false;
+	public static final String MOD_ID = "more-color-api";
+	public static final boolean DEBUG = false;
 }
