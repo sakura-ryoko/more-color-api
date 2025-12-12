@@ -22,7 +22,6 @@ package com.sakuraryoko.morecolors.impl.commands;
 
 import java.util.*;
 import javax.annotation.Nullable;
-import me.lucko.fabric.api.permissions.v0.Permissions;
 import org.jetbrains.annotations.ApiStatus;
 
 import com.mojang.brigadier.CommandDispatcher;
@@ -57,10 +56,10 @@ public class MoreColorsCommand implements IServerCommand
     {
         dispatcher.register(
                 literal(this.getName())
-                        .requires(Permissions.require(this.getNode(), ConfigWrap.opt().moreColorsCommandPermissions))
+                        .requires(PermsWrap.check(this.getNode(), ConfigWrap.opt().moreColorsCommandPermissions))
                         .executes(ctx -> this.about(ctx.getSource(), ctx))
                         .then(literal("test")
-                                      .requires(Permissions.require(this.getNode() + ".test", ConfigWrap.opt().moreColorsTestCommandPermissions))
+                                      .requires(PermsWrap.check(this.getNode() + ".test", ConfigWrap.opt().moreColorsTestCommandPermissions))
                                       .executes(ctx -> this.test(ctx.getSource(), "all", ctx))
                                       .then(literal("all")
                                                     .executes(ctx -> this.test(ctx.getSource(), "all", ctx))
@@ -76,7 +75,7 @@ public class MoreColorsCommand implements IServerCommand
                                       )
                         )
                         .then(literal("add")
-                                      .requires(Permissions.require(this.getNode() + ".add", ConfigWrap.opt().moreColorsAddCommandPermissions))
+                                      .requires(PermsWrap.check(this.getNode() + ".add", ConfigWrap.opt().moreColorsAddCommandPermissions))
                                       .then(argument("node", StringArgumentType.word())
                                                     .then(argument("hexCode", StringArgumentType.word())
                                                                   .executes(ctx -> this.add(ctx.getSource(), StringArgumentType.getString(ctx, "node"), StringArgumentType.getString(ctx, "hexCode"), null, ctx))
@@ -87,15 +86,15 @@ public class MoreColorsCommand implements IServerCommand
                                       )
                         )
                         .then(literal("reload")
-                                      .requires(Permissions.require(this.getNode() + ".reload", ConfigWrap.opt().moreColorsReloadCommandPermissions))
+                                      .requires(PermsWrap.check(this.getNode() + ".reload", ConfigWrap.opt().moreColorsReloadCommandPermissions))
                                       .executes(ctx -> this.reload(ctx.getSource(), ctx))
                         )
                         .then(literal("save")
-                                      .requires(Permissions.require(this.getNode() + ".save", ConfigWrap.opt().moreColorsSaveCommandPermissions))
+                                      .requires(PermsWrap.check(this.getNode() + ".save", ConfigWrap.opt().moreColorsSaveCommandPermissions))
                                       .executes(ctx -> this.save(ctx.getSource(), ctx))
                         )
                         .then(literal("defaults")
-                                      .requires(Permissions.require(this.getNode() + ".defaults", ConfigWrap.opt().moreColorsDefaultsCommandPermissions))
+                                      .requires(PermsWrap.check(this.getNode() + ".defaults", ConfigWrap.opt().moreColorsDefaultsCommandPermissions))
                                       .executes(ctx -> this.defaults(ctx.getSource(), ctx))
                         )
         );
