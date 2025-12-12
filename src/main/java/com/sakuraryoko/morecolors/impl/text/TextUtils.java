@@ -26,16 +26,17 @@ package com.sakuraryoko.morecolors.impl.text;
 //#endif
 import javax.annotation.Nonnull;
 import eu.pb4.placeholders.api.TextParserUtils;
+import eu.pb4.placeholders.api.node.TextNode;
+import eu.pb4.placeholders.api.node.parent.ParentNode;
+import eu.pb4.placeholders.api.parsers.TextParserV1;
 
 import net.minecraft.network.chat.Component;
-
-import com.sakuraryoko.corelib.api.text.ITextHandler;
 
 //#if MC >= 12006
 //$$ @SuppressWarnings("deprecation")
 //#else
 //#endif
-public class TextUtils implements ITextHandler
+public class TextUtils implements ITextNodeHandler
 {
     private static final TextUtils INSTANCE = new TextUtils();
     public static TextUtils getInstance() { return INSTANCE; }
@@ -92,5 +93,34 @@ public class TextUtils implements ITextHandler
     public Component of(@Nonnull String str)
     {
         return Component.literal(str);
+    }
+
+    @Override
+    public TextNode toTextNode(@Nonnull String str)
+    {
+        return TextNode.of(str);
+    }
+
+    @Override
+    public TextNode toTextNode(@Nonnull Component text)
+    {
+        return TextNode.convert(text);
+    }
+
+    @Override
+    public Component formatTextNode(@Nonnull TextNode node)
+    {
+        //#if MC <= 12104
+        if (LEGACY)
+        {
+            return new ParentNode(TextParserV1.DEFAULT.parseNodes(node)).toText(null, true);
+        }
+        //#endif
+
+        //#if MC >= 12006
+        //$$ return TextParser.PARSE.parseNode(node).toText();
+        //#else
+        return new ParentNode(TextParserV1.DEFAULT.parseNodes(node)).toText(null, true);
+        //#endif
     }
 }

@@ -26,6 +26,8 @@ import java.util.Locale;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import eu.pb4.placeholders.api.node.TextNode;
+
 import net.minecraft.network.chat.Component;
 
 import com.sakuraryoko.morecolors.impl.MoreColor;
@@ -33,6 +35,7 @@ import com.sakuraryoko.morecolors.impl.config.ConfigWrap;
 import com.sakuraryoko.morecolors.impl.nodes.MoreColorNode;
 import com.sakuraryoko.morecolors.impl.nodes.NodeManager;
 import com.sakuraryoko.morecolors.impl.text.FormattingExample;
+import com.sakuraryoko.morecolors.impl.text.ITextNodeHandler;
 import com.sakuraryoko.morecolors.impl.text.TextUtils;
 
 public interface MoreColorsAPI
@@ -101,6 +104,26 @@ public interface MoreColorsAPI
     static Component of(@Nonnull String str)
     {
         return TextUtils.getInstance().of(str);
+    }
+
+    static TextNode toTextNode(@Nonnull String str)
+    {
+        return TextUtils.getInstance().toTextNode(str);
+    }
+
+    static TextNode toTextNode(@Nonnull Component text)
+    {
+        return TextUtils.getInstance().toTextNode(text);
+    }
+
+    static Component formatTextNode(@Nonnull TextNode node)
+    {
+        return TextUtils.getInstance().formatTextNode(node);
+    }
+
+    static ITextNodeHandler getTextNodeHandler()
+    {
+        return TextUtils.getInstance();
     }
 
     static Component getBuiltInFormattingTest()
