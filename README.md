@@ -8,4 +8,4 @@ This is basically an add-on mod for [Text Placeholder API](https://modrinth.com/
 
 You can edit the `config/more-color-api.json`, or optionally use the `/morecolors` command to manipulate the color tags that are available; and from within your own mod fully utilize Text Placeholder API using the `TextUtils` Instance without much effort.  More Colors API will handle the rest for your String to Text/Component-formatting needs!
 
-[![Join Sakura's RyokoCraft Discord](https://sakuraryoko.com/files/1398873/discord-300px.png)](https://discord.gg/CUPAjkXw)
+[![Join Sakura's RyokoCraft Discord](https://sakuraryoko.com/files/1398873/discord-300px.png)](https://discord.gg/njVWs6DF)
