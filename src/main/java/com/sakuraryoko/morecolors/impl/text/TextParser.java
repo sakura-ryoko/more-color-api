@@ -22,27 +22,49 @@ package com.sakuraryoko.morecolors.impl.text;
 
 import org.jetbrains.annotations.ApiStatus;
 
-//#if MC >= 12006
+//#if MC >= 26.1
 //$$ import eu.pb4.placeholders.api.parsers.NodeParser;
 
 //$$ @ApiStatus.Internal
 //$$ public class TextParser
 //$$ {
-    //$$ public static NodeParser LEGACY;
-    //$$ public static NodeParser SIMP;
-    //$$ public static NodeParser QUICK;
-    //$$ public static NodeParser PLACEHOLDER;
-    //$$ public static NodeParser PARSE;
+        //$$ public static NodeParser LEGACY;
+        //$$ public static NodeParser SIMP;
+        //$$ public static NodeParser QUICK;
+        //$$ public static NodeParser PLACEHOLDER;
+        //$$ public static NodeParser PARSE;
 
-    //$$ public static void build()
-    //$$ {
-        //$$ LEGACY = NodeParser.builder().legacyAll().build();
-        //$$ SIMP = NodeParser.builder().simplifiedTextFormat().build();
-        //$$ QUICK = NodeParser.builder().quickText().build();
-        //$$ PLACEHOLDER = NodeParser.builder().globalPlaceholders().build();
+        //$$ public static void build()
+        //$$ {
+                //$$ LEGACY = NodeParser.builder().legacyAll().build();
+                //$$ SIMP = NodeParser.builder().simplifiedTextFormat().build();
+                //$$ QUICK = NodeParser.builder().quickText().build();
+                //$$ PLACEHOLDER = NodeParser.builder().serverPlaceholders().build();
 
-        //$$ PARSE = NodeParser.builder().add(LEGACY).add(SIMP).add(QUICK).build();
-    //$$ }
+                //$$ PARSE = NodeParser.builder().add(LEGACY).add(SIMP).add(QUICK).build();
+                //$$ }
+//$$ }
+//#elseif MC >= 1.20.6
+//$$ import eu.pb4.placeholders.api.parsers.NodeParser;
+
+//$$ @ApiStatus.Internal
+//$$ public class TextParser
+//$$ {
+        //$$ public static NodeParser LEGACY;
+        //$$ public static NodeParser SIMP;
+        //$$ public static NodeParser QUICK;
+        //$$ public static NodeParser PLACEHOLDER;
+        //$$ public static NodeParser PARSE;
+
+        //$$ public static void build()
+        //$$ {
+                //$$ LEGACY = NodeParser.builder().legacyAll().build();
+                //$$ SIMP = NodeParser.builder().simplifiedTextFormat().build();
+                //$$ QUICK = NodeParser.builder().quickText().build();
+                //$$ PLACEHOLDER = NodeParser.builder().globalPlaceholders().build();
+
+                //$$ PARSE = NodeParser.builder().add(LEGACY).add(SIMP).add(QUICK).build();
+        //$$ }
 //$$ }
 //#else
 @ApiStatus.Internal

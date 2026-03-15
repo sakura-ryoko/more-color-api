@@ -25,15 +25,21 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
-import eu.pb4.placeholders.api.node.TextNode;
 import eu.pb4.placeholders.api.node.parent.ColorNode;
+//#if MC >= 26.1
+//#else
+import eu.pb4.placeholders.api.node.TextNode;
 import eu.pb4.placeholders.api.parsers.TextParserV1;
+//#endif
 //#if MC >= 12006
 //$$ import eu.pb4.placeholders.api.parsers.tag.TagRegistry;
 //$$ import eu.pb4.placeholders.api.parsers.tag.TextTag;
 //#else
 //#endif
+//#if MC >= 26.1
+//#else
 import eu.pb4.placeholders.impl.textparser.TextParserImpl;
+//#endif
 import org.jetbrains.annotations.ApiStatus;
 
 import net.minecraft.network.chat.TextColor;

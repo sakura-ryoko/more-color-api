@@ -20,19 +20,22 @@
 
 package com.sakuraryoko.morecolors.impl.text;
 
-//#if MC >= 12006
+//#if MC >= 1.20.6
 //$$ import eu.pb4.placeholders.api.ParserContext;
 //#else
 //#endif
 import javax.annotation.Nonnull;
+//#if MC >= 1.21.11
+//#else
 import eu.pb4.placeholders.api.TextParserUtils;
+import eu.pb4.placeholders.api.parsers.TextParserV1;
+//#endif
 import eu.pb4.placeholders.api.node.TextNode;
 import eu.pb4.placeholders.api.node.parent.ParentNode;
-import eu.pb4.placeholders.api.parsers.TextParserV1;
 
 import net.minecraft.network.chat.Component;
 
-//#if MC >= 12006
+//#if MC >= 1.20.6
 //$$ @SuppressWarnings("deprecation")
 //#else
 //#endif
@@ -41,13 +44,18 @@ public class TextUtils implements ITextNodeHandler
     private static final TextUtils INSTANCE = new TextUtils();
     public static TextUtils getInstance() { return INSTANCE; }
 
-    //#if MC >= 12006
+    //#if MC >= 1.20.6
     //$$ public static final boolean LEGACY = false;
     //#else
     public static final boolean LEGACY = true;
     //#endif
 
-    //#if MC >= 12006
+    //#if MC >= 26.1
+    //$$ public Component formatText(String str, ParserContext ctx)
+    //$$ {
+        //$$ return TextParser.PARSE.parseComponent(str, ctx);
+    //$$ }
+    //#elseif MC >= 1.20.6
     //$$ public Component formatText(String str, ParserContext ctx)
     //$$ {
         //$$ return TextParser.PARSE.parseText(str, ctx);
@@ -58,14 +66,16 @@ public class TextUtils implements ITextNodeHandler
     @Override
     public Component formatText(@Nonnull String str)
     {
-        //#if MC <= 12104
+        //#if MC <= 1.21.4
         if (LEGACY)
         {
             return TextParserUtils.formatText(str);
         }
         //#endif
 
-        //#if MC >= 12006
+        //#if MC >= 26.1
+        //$$ return TextParser.PARSE.parseNode(str).toComponent();
+        //#elseif MC >= 1.20.6
         //$$ return TextParser.PARSE.parseNode(str).toText();
         //#else
         return TextParserUtils.formatText(str);
@@ -75,14 +85,16 @@ public class TextUtils implements ITextNodeHandler
     @Override
     public Component formatTextSafe(@Nonnull String str)
     {
-        //#if MC <= 12104
+        //#if MC <= 1.21.4
         if (LEGACY)
         {
             return TextParserUtils.formatTextSafe(str);
         }
         //#endif
 
-        //#if MC >= 12006
+        //#if MC >= 26.1
+        //$$ return TextParser.PARSE.parseNode(str).toComponent();
+        //#elseif MC >= 1.20.6
         //$$ return TextParser.PARSE.parseNode(str).toText();
         //#else
         return TextParserUtils.formatTextSafe(str);
@@ -117,7 +129,9 @@ public class TextUtils implements ITextNodeHandler
         }
         //#endif
 
-        //#if MC >= 12006
+        //#if MC >= 26.1
+        //$$ return TextParser.PARSE.parseNode(node).toComponent();
+        //#elseif MC >= 1.20.6
         //$$ return TextParser.PARSE.parseNode(node).toText();
         //#else
         return new ParentNode(TextParserV1.DEFAULT.parseNodes(node)).toText(null, true);
