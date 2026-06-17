@@ -21,6 +21,9 @@
 package com.sakuraryoko.morecolors.impl.text;
 
 import java.util.List;
+//#if MC >= 26.2
+//$$ import java.util.Locale;
+//#endif
 
 import org.jetbrains.annotations.ApiStatus;
 
@@ -44,7 +47,9 @@ public class FormattingExample
         {
             if (fmt.equals(ChatFormatting.OBFUSCATED))
             {
-                //#if MC >= 11904
+                //#if MC >= 26.2
+                //$$ testString.append("<r> <u><copy:'<").append(fmt.name().toLowerCase(Locale.ROOT)).append(">'>").append(fmt.name().toLowerCase(Locale.ROOT)).append(":<r> <").append(fmt.name().toLowerCase(Locale.ROOT)).append(">").append(fmt.name().toLowerCase(Locale.ROOT));
+                //#elseif MC >= 11904
                 //$$ testString.append("<r> <u><copy:'<").append(fmt.getName()).append(">'>").append(fmt.getName()).append(":<r> <").append(fmt.getName()).append(">").append(fmt.getName());
                 //#else
                 testString.append("<r> <underline><copy:'<").append(fmt.getName()).append(">'>").append(fmt.getName()).append(":<r> <").append(fmt.getName()).append(">").append(fmt.getName());
@@ -52,7 +57,11 @@ public class FormattingExample
             }
             else if (!fmt.equals(ChatFormatting.RESET))
             {
+                //#if MC >= 26.2
+                //$$ testString.append("<r> <copy:'<").append(fmt.name().toLowerCase(Locale.ROOT)).append(">'><").append(fmt.name().toLowerCase(Locale.ROOT)).append(">").append(fmt.name().toLowerCase(Locale.ROOT));
+                //#else
                 testString.append("<r> <copy:'<").append(fmt.getName()).append(">'><").append(fmt.getName()).append(">").append(fmt.getName());
+                //#endif
             }
         }
 
